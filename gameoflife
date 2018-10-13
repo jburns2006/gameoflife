@@ -1,1 +1,150 @@
 //game of life program
+int xsize = 50;
+int ysize = 50;
+int zsize = 50;
+
+int prob = 100;   //divide prob by 100 and that is the percentage of cells filled at the start
+
+int boxX = 250;
+int boxY = 400;
+int boxZ = -50;
+
+int angleX = 0;
+int angleZ = 0;
+int angleY = 0;
+
+int eyeX = width/2;
+int eyeY = height/2;
+int eyeZ = height/2;
+
+int screenX = boxX;
+int screenY = boxY;
+int screenZ = boxZ;
+
+int boxSize = 10;
+
+int consoleX = 10;
+int consoleY = 20;
+
+int grid[][][] = new int [xsize][ysize][zsize];
+int grid2[][][] = new int [xsize][ysize][zsize];
+
+
+void setup(){
+  size(1366, 728, P3D);
+  textSize(15);
+  lights();
+  noLoop();
+  setupGrid();
+
+}
+
+void draw(){
+  background(0);
+  fill(250);
+  lights();
+  // camera(eyeX, eyeY, eyeZ, Xscreen, Yscreen, axisX, axisY, axisZ
+  //camera(width/2, height/2, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);  //default just in case...
+  camera(width/2, height/2, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);   
+  showConsole();
+  mouseHover();
+  camera(eyeX, eyeY, eyeZ / tan(PI/6), screenX, screenY, screenZ, 0, 1, 0);
+  drawGrid();
+  doRules();
+}
+
+void setupGrid(){
+  for(int x = 0; x < xsize; x++){
+    for(int y = 0; y < ysize; y++){
+      for(int z = 0; z < zsize; z++){
+        grid[x][y][z] = 0;
+        grid2[x][y][z] = 0;
+        if(int(random(prob)) == 1)
+          grid[x][y][z] = 1;
+      }
+    }
+  }
+}
+
+void drawGrid(){
+  for(int x = 0; x < xsize; x++){
+    for(int y = 0; y < ysize; y++){
+      for(int z = 0; z < zsize; z++){
+        if(grid[x][y][z] == 1)
+          drawCell(x, y, z);
+      }
+    }
+  }
+}
+
+void drawCell(int x, int y, int z){
+  fill(0, 250, 0);
+  pushMatrix();
+  translate(boxSize * x, boxSize * y, -boxSize * z); //(boxX(boxSize * x), boxY - (boxSize * y), boxZ - (boxSize * z));  // use this later on
+  rotateX(radians(angleX));
+  rotateY(radians(angleY));        
+  rotateZ(radians(angleZ));
+  box(boxSize, boxSize, boxSize);
+  popMatrix();
+}
+
+void doRules(){
+  for(int x = 0; x < xsize; x++){
+    for(int y = 0; y < ysize; y++){
+      for(int z = 0; z < zsize; z++){
+        grid2[x][y][z] = 0;
+        if(grid[x][y][z] == 1){
+          dies(x, y, z);
+        }
+        else{
+          lives(x, y,  z);
+        }
+      }
+    }
+  }
+}
+
+void dies(int x, int y, int z){
+  int count = 0;
+  boolean die = false;
+  //xy
+  if(x != 0){
+    if(grid[x-1][y][z] == 1){
+      count++;
+    }
+  }
+  if(x != (xsize - 1)){
+    if(grid[x+1][y][z] == 1){
+      count++;
+    }
+  }
+  if(y != 0){
+    if(grid[x][y-1][z] == 1){
+      count++;
+    }
+  }
+  if(y != (ysize - 1)){
+    if(grid[x][y+1][z] == 1){
+      count++;
+    }
+  }
+  if((x != 0)&&(y != 0)){
+    if(grid[x-1][y-1][z] == 1){
+      count++;
+    }
+  }
+  if((x != 0)&&(y != (ysize - 1))){
+    if(grid[x-1][y+1][z] == 1){
+      count++;
+    }
+  }
+}
+  
+   
+  //yz
+  
+  //xz
+
+
+void lives(int x, int y, int z){
+}
