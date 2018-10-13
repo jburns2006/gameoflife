@@ -1,1 +1,203 @@
 //game of life program
+void showConsole(){
+  textSize(15);
+  fill(250);
+  text("camera( " + eyeX + ", " + eyeY + ", " + eyeZ + ", " + screenX + ", " + screenY + ", " + screenZ + ", 0, 1, 0)" ,consoleX, consoleY);
+  text("coordinates( " + boxX + ", " + boxY + ", " + boxZ + ")", consoleX, consoleY + 20);
+  text("q < boxX < w", consoleX, consoleY + 60);
+  text("e < boxY < r", consoleX, consoleY + 80);
+  text("t < boxZ < y", consoleX, consoleY + 100);
+  text("a < eyeX < s", consoleX, consoleY + 120);
+  text("d < eyeY < f", consoleX, consoleY + 140);
+  text("g < eyeZ < h", consoleX, consoleY + 160);
+  text("z < screenX < x", consoleX, consoleY + 180);
+  text("c < screenY < v", consoleX, consoleY + 200);
+  text("b < screenZ < n", consoleX, consoleY + 220);
+ // text("evolve land : UP", consoleX, consoleY + 260);
+ // text("restart land: down", consoleX, consoleY + 280);
+  /*
+  text("Q <  matX < W :" + matX, consoleX, consoleY + 320);
+  text("E <  matY < R :" + matY, consoleX, consoleY + 340);
+  text("T <  matZ < Y :" + matZ, consoleX, consoleY + 360);
+  */
+}
+
+void keyPressed(){
+  if(1 > 0){
+    if(key == 'q'){ boxX -= 10; }
+    if(key == 'w'){ boxX += 10; }
+    if(key == 'e'){ boxY -= 10; }
+    if(key == 'r'){ boxY += 10; }
+    if(key == 't'){ boxZ -= 10; }
+    if(key == 'y'){ boxZ += 10; }
+    if(key == 'a'){ eyeX -= 10; }
+    if(key == 's'){ eyeX += 10; }
+    if(key == 'd'){ eyeY -= 10; }
+    if(key == 'f'){ eyeY += 10; }
+    if(key == 'g'){ eyeZ -= 10; }
+    if(key == 'h'){ eyeZ += 10; }
+    if(key == 'z'){ screenX -= 10; }
+    if(key == 'x'){ screenX += 10; }
+    if(key == 'c'){ screenY -= 10; }
+    if(key == 'v'){ screenY += 10; }
+    if(key == 'b'){ screenZ -= 10; }
+    if(key == 'n'){ screenZ += 10; }
+    /*
+    if((key == 'Q')&&(matX != 1)){
+      matX--;
+      repeat = false;
+      setupGrid();
+    }
+    if((key == 'W')&&(matX != 100)){
+      matX++;
+      repeat = false;
+      setupGrid();
+    }
+    if((key == 'E')&&(matY != 1)){
+      matY--;
+      repeat = false;
+      setupGrid();
+    }
+    if((key == 'R')&&(matY != 100)){
+      matY++;
+      repeat = false;
+      setupGrid();
+    }
+    if((key == 'T')&&(matZ != 1)){
+      matZ--;
+      repeat = false;
+      setupGrid();
+    }
+    if((key == 'Y')&&(matZ != 100)){
+      matZ++;
+      repeat = false;
+      setupGrid();
+    }
+    
+    if(keyCode == UP){ 
+      repeat = true;
+      setupGrid();
+    }
+    if(keyCode == DOWN){
+      repeat = false;
+      setupGrid();
+    }
+    */
+    if(key == '1'){
+      boxX = 160;
+      boxY = 410;
+      boxZ = 40;
+      eyeX = 50;
+      eyeY = 50;
+      eyeZ = 50;
+      screenX = 250;
+      screenY = 400;
+      screenZ = -50;
+    }
+    if(key == '2'){
+      boxX = -380;
+      boxY = -240;
+      boxZ = -380;
+      eyeX = -510;
+      eyeY = -620;
+      eyeZ = -460;
+      screenX = 260;
+      screenY = 570;
+      screenZ = -80;
+    }    
+    if(key == '3'){
+      boxX = 740;
+      boxY = -260;
+      boxZ = -530;
+      eyeX = 1110;
+      eyeY = -570;
+      eyeZ = -540;
+      screenX = 220;
+      screenY = 610;
+      screenZ = -80;
+    }
+    if(key == '4'){
+      boxX = 30;
+      boxY = 420;
+      boxZ = 0;
+      eyeX = 380;
+      eyeY = 110;
+      eyeZ = 50;
+      screenX = 250;
+      screenY = 400;
+      screenZ = -50;
+    }
+    if(key == '5'){
+      boxX = -140;
+      boxY = -350;
+      boxZ = 50;
+      eyeX = -40;
+      eyeY = -790;
+      eyeZ = -40;
+      screenX = 250;
+      screenY = 670;
+      screenZ = -70;
+    }
+    loop();
+  }
+}
+  void mouseHover(){
+  textSize(11);
+  if((mouseX < consoleX + 100)&&(mouseX > consoleX)){
+    if((mouseY < consoleY + 70)&&(mouseY > consoleY + 50)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  x position of the shape", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 90)&&(mouseY > consoleY + 70)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  y position of the shape", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 110)&&(mouseY > consoleY + 90)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  Z position of the shape", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 130)&&(mouseY > consoleY + 110)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  x position of the camera", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 150)&&(mouseY > consoleY + 130)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  y position of the camera", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 170)&&(mouseY > consoleY + 150)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  z position of the camera", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 190)&&(mouseY > consoleY + 170)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  x position of the screen", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 210)&&(mouseY > consoleY + 190)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  y position of the screen", mouseX+1, mouseY+13);
+    }
+    if((mouseY < consoleY + 230)&&(mouseY > consoleY + 210)){
+      fill(250);
+      rect(mouseX+1, mouseY+4, 210, 14);
+      fill(0);
+      text("     shows the  z position of the screen", mouseX+1, mouseY+13);
+    }
+  }
+}
+
